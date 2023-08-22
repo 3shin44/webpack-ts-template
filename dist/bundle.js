@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log(1+1),console.log(((o,l)=>o-l)(2,1))})();
