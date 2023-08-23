@@ -1,1 +1,3 @@
-console.log("Hello")
+import {add, subtract} from "./functions"
+
+export {add, subtract}
