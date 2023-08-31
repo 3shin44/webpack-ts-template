@@ -6,8 +6,8 @@ module.exports = {
     library: 'testLibrary',
     libraryTarget: 'umd', // 输出格式为 UMD
     filename: 'bundle.js',
-    globalObject: 'this',
     path: path.resolve(__dirname, 'dist'),
+    umdNamedDefine: true,
   },
   resolve: {
     extensions: ['.ts', '.js'],
