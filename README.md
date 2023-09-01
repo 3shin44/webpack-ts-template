@@ -1,12 +1,47 @@
 # Webpack & TypeScript Environmental Template
 
-## 環境建置
+## 使用需求
+
+在前端環境中可使用HTML-script或ES-module導入
+
+## 使用說明
+
+- HTML-script
+
+  - 導入
+  
+  ` <script src="./dist/bundle_browser.js"> `
+
+  - 使用
+  ` console.log( LibraryName.func() ) `
+
+- ES-module
+
+  - 導入
+  
+  ` import * as LibraryName from "./dist/bundle_esm" `
+
+  - 使用
+  
+  ` console.log( LibraryName.func() ) `
+
+## 專案環境建置
 
 - 安裝 `npm install`
  
-## 使用
+## 開發說明
 
 - 使用指引：開發檔案於src目錄下, 最終要輸出的資料請匯至index.ts檔案中
+
+- 導出參數
+
+  - BROWSER (UMD)
+
+  設定LibraryName, 以便後續呼叫
+
+  - ESM (ES Module)
+
+  
 
 - 打包: 執行`npm run build-prod`, 匯出檔案於dist目錄下
 
