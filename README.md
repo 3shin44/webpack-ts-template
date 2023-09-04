@@ -17,13 +17,21 @@
 
 - ES-module
 
-  - 導入
+  - 導入-1 (適用: 導入所有函式)
   
   ` import * as LibraryName from "./dist/bundle_esm" `
 
-  - 使用
+  - 使用-1
   
   ` console.log( LibraryName.func() ) `
+
+  - 導入-2 (適用: 導入單一函式)
+  
+  ` import { funcName } from "./dist/bundle_esm" `
+
+  - 使用-2
+  
+  ` console.log( funcName() ) `
 
 ## 專案環境建置
 
@@ -41,6 +49,7 @@
 
   - ESM (ES Module)
 
+  import * as LibName from '{pathToLib}'
   import LibName from '{pathToLib}'
 
 - 打包: 執行對應語法`npm run build-all`, 匯出檔案於dist目錄下
