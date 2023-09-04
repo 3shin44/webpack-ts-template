@@ -1,13 +1,18 @@
 const path = require('path');
 
+// 預設webpack參數檔案
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'testLibrary',
-    libraryTarget: 'umd', // 输出格式为 UMD
-    filename: 'bundle.js',
+    library: {
+      // do not specify a `name` here
+      type: 'module',
+    },
+    filename: 'bundle_esm.js',
     path: path.resolve(__dirname, 'dist'),
-    umdNamedDefine: true,
+  },
+  experiments: {
+    outputModule: true,
   },
   resolve: {
     extensions: ['.ts', '.js'],

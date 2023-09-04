@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-dev": "npx webpack --config webpack.config.js --mode development",
-    "build-prod": "npx webpack --config webpack.config.js --mode production"
+    "build-all": "npx webpack --config webpack.config.js --mode production && npx webpack --config webpack.config_umd.js --mode production",
+    "build-esm": "npx webpack --config webpack.config.js --mode production",
+    "build-umd": "npx webpack --config webpack.config_umd.js --mode production"
   },
   "keywords": [],
   "author": "",

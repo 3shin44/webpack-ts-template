@@ -10,7 +10,7 @@
 
   - 導入
   
-  ` <script src="./dist/bundle_browser.js"> `
+  ` <script src="./dist/bundle_umd.js"> `
 
   - 使用
   ` console.log( LibraryName.func() ) `
@@ -41,59 +41,37 @@
 
   - ESM (ES Module)
 
-  
+  import LibName from '{pathToLib}'
 
-- 打包: 執行`npm run build-prod`, 匯出檔案於dist目錄下
+- 打包: 執行對應語法`npm run build-all`, 匯出檔案於dist目錄下
 
-## Project Structure
-
-
-## CMDs of packjson
-
-
-## 備註
-
-- webpack.config.js should setting "LibraryName" property for function export
-
-- export method: webpack/rollup
-  
-| Type           | webpack                                                                                                          | rollup                                           |
-| -------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| Usage          | Widly, Complex web application                                                                                   | Focus on JS library                              |
-| Syntax         | CommonJS and other                                                                                               | ES6                                              |
-| Export         | have various export options                                                                                      | export an individaul library, and optimize on it |
-| Tree Shaking   | Basic                                                                                                            | Advanced, usually export smaller result          |
-| How to choice? | For complex app, contains js, css, html...and additional func such as hot module replacement, server development | For JS library development                       |
-
-- UMD format
-
-- UMD為兼容前後端語法(Node.js, AMD, Window/Global), 輸出時需多設定` globalObject: 'this' `, 不過本專案多為前端使用, 確認無後端需求後可考慮改為純前端語法ES6 module ` libraryTarget: 'module' `
+  - 單獨打包使用對應語法即可
 
 
 ## 筆記
 
-Webpack也可以輸出為ES6 module, 但要特別設定, 且目前為實驗性功能,
+- 需求
 
-要達到原始需求:
+  - 在前端環境中可使用HTML-script或ES-module導入
 
-1. 可使用ES6 Module語法  
+  - 在此需求下, 兩種匯入方式對應不同匯出語法, 此處可透過套件協助, 以達到"維護一套原始碼, 輸出不同格式"
 
-2. 保留 HTML script 導入語法
+- Webpack設定細節
 
-以webpack目前設定, 應改兩組設定檔分別導出, 若還要弄成NPM Library, 由於webpack會做檢查
+  - output.library: 輸出格式類型, 詳見: https://webpack.js.org/configuration/output/#outputlibrary
 
-所以package.json也要做對應設定, 不然直接被打槍
+  - webpacl.config.js 若設定為UMD格式, 應設定對應"LibraryName"
 
-關鍵字: libraryTarget: 'module',   experiments: { outputModule: true }
+  - webpacl.config.js 若設定為ES6 module, 但要特別設定, 且目前為實驗性功能, 關鍵字: libraryTarget: 'module',   experiments: { outputModule: true }
 
-## 結論
+  - 以NPM函式庫發布: 需在package.json指定函式庫格式, 但webpack預設會強制檢查到格式不符而中斷匯出, 若以NPM函式庫發布且要符合多格式匯入需求, 需討論以何種方式發布較適當
 
-- 需求與情境
-
-原始碼為JS function且會切分許多檔案, 最終合併的檔案移除註解與簡化變數名稱, 使用方式為HTML-script或ES Module
-
-- 做法
-
-  - Webpack only: 需分別設定&導出兩種檔案
-
-  - Mix: Webpack包UMD格式, Rollup包ES Module
+- 匯出格式工具類型對比
+  
+| 類型         | webpack                                           | rollup                     |
+| ------------ | ------------------------------------------------- | -------------------------- |
+| 適用場景     | 泛用, 複雜的網頁開發                              | 專精 JS 模組化             |
+| 支援匯出語法 | 預設為 CommonJS, 同時內建其他語法                 | ES6                        |
+| 匯出         | 依使用需求而定                                    | 匯出單獨模組且優化結果較好 |
+| Tree Shaking | 基礎                                              | 佳, 且壓縮後體積通常較小   |
+| 選擇建議     | 需較高相容性的環境, 複雜網頁元件(CSS, HTML...etc) | 專用 JS 模組               |
